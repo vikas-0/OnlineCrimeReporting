@@ -1,0 +1,102 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="Content/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="Content/Style.css" type="text/css" />
+    <link rel="stylesheet" href="Content/font-awesome.min.css" type="text/css" />
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/Script.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="title">
+                <h1>Online Crime Reporting Portal</h1>
+            </div>
+            <nav class="navbar navbar-default  navbar-static-top ">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li id="HomeLink"><a href="index.aspx"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                            
+                            <li id="complainmenu" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil-square-o"></i>&nbsp;Complain<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li id="registercomp"><a href="complain.aspx">Register New Complain Report</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#getReportID">View Previous Report</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="News.aspx"><i class="fa fa-newspaper-o"></i>&nbsp;News</a></li>
+                            <li id="LoginLink" runat="server" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-sign-in"></i>&nbsp;Login <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="form-group" style="padding-left: 0.6em; padding-right: 0.6em">
+                                            <asp:TextBox ID="UserID" runat="server" TextMode="SingleLine" CssClass="form-control" placeholder="UserID"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Username is Required" ValidationGroup="login" ControlToValidate="UserID"></asp:RequiredFieldValidator>
+                                            <asp:TextBox ID="Password" runat="server" TextMode="Password" CssClass="form-control" placeholder="Password"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Password is Required" ValidationGroup="login" ControlToValidate="Password"></asp:RequiredFieldValidator>
+                                            <label id="errr" runat="server"> </label>
+                                            <asp:Button ID="LoginButton" runat="server" Text="Login" CssClass="btn btn-default" Style="float: right; margin-top: 0.4em" OnClick="LoginButton_Click" CausesValidation="true" ValidationGroup="login"/>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="AdminLink" NavigateUrl="~/Admin.aspx" runat="server"><i class="fa fa-wrench"></i>&nbsp;Admin</asp:HyperLink></li>
+                            <li>
+                                
+                                <asp:HyperLink ID="LogoutLink" NavigateUrl="logout.aspx" runat="server"><span class="fa fa-sign-out"></span>&nbsp;Logout</asp:HyperLink></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+
+            </asp:ContentPlaceHolder>
+            <div class="container">
+                <div id="getReportID" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Enter Report ID/ Sl No.</h4>
+                            </div>
+                            <div class="modal-body">
+                                <asp:TextBox ID="ReportIDTextBox" type="number" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="This field cannot be blank" ControlToValidate="ReportIDTextBox"  ValidationGroup="viewReport"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:Button ID="SubmitReportIDButton" runat="server" Text="Submit" CssClass="btn btn-default" OnClick="SubmitReportIDButton_Click" CausesValidation="true" ValidationGroup="viewReport"/>
+                         
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div class="footer well well-sm">
+                Copyright 2016. <asp:HyperLink ID="HyperLink1" NavigateUrl="~/contactus.aspx" runat="server">About Us</asp:HyperLink>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
